@@ -18,6 +18,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
+  
   test "login with valid information followed by logout" do
     get login_path
     post login_path, params: { session: { email:    @user.email,
@@ -50,6 +51,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     log_in_as(@user, remember_me: '1')
     # Log in again and verify that the cookie is deleted.
     log_in_as(@user, remember_me: '0')
-    assert_not_nil cookies['remember_token']
+    assert cookies['remember_token'].blank?
   end
-end 
+
+end
